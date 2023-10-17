@@ -42,14 +42,27 @@ class AppFixtures extends Fixture
         // On boucle sur 30 éléments pour créer 30 objets Option
         // et les ajouter au tableau $objectOptions
         // puis on persiste chaque objet Option
-        for ($i=0; $i < 30; $i++) { 
-            $optional = new Optional();
-            $optional->setType($objectTypeOptions[rand(0, count($objectTypeOptions) - 1)]);
-            $optional->setName($faker->word());
-            $optional->setDescription($faker->sentence());
-            //$option->setDescription($faker->sentence());
-            $objectOptionals[] = $optional;
-            $manager->persist($optional);
+
+        $tabSoft = ['pack Office', 'pack Adobe', 'pack Video', 'pack Audio'];
+        $tabHard = ['PC', 'Retroprojecteur', 'Sono', 'Tableau blanc'];
+        $tabErgo = ['Accès PMR', 'Climatisation', 'Lumière naturelle', 'Parking'];
+
+        for ($i=0; $i < 3; $i++) { 
+            for($j=0; $j<4; $j++){
+                $optional = new Optional();
+                $optional->setType($objectTypeOptions[$i]);
+                if($i == 0){
+                    $optional->setName($tabSoft[$j]);
+                }elseif($i == 1){
+                    $optional->setName($tabHard[$j]);
+                }else{
+                    $optional->setName($tabErgo[$j]);
+                }
+                $optional->setDescription($faker->sentence());
+                $objectOptionals[] = $optional;
+                $manager->persist($optional);
+
+            }
         }
 
            // On crée un tableau vide qui contiendra tous les objets Room créés ici
@@ -132,9 +145,9 @@ class AppFixtures extends Fixture
                $booking = new Booking();
                $booking->setEventType($objectEventTypes[$faker->numberBetween(0, count($objectEventTypes) - 1)]);
                $booking->setStatus($objectStatus[$faker->numberBetween(0, count($objectStatus) - 1)]);
-               $booking->setStartDate($faker->dateTimeBetween('+1 days', '+1 year'));
+               $booking->setStartDate($faker->dateTimeBetween('+1 days', '+5 days'));
                $nbDays = rand(1, 10);
-               $booking->setEndDate(date_add($booking->getStartDate(), date_interval_create_from_date_string($nbDays . " days")));
+               $booking->setEndDate($faker->dateTimeBetween('+1 week', '+2 weeks'));
                $booking->setComment($faker->sentence());
                $booking->setRoom($objectRooms[$faker->numberBetween(0, count($objectRooms) - 1)]);
                $total = $booking->getRoom()->getDayPrice() * $nbDays;
