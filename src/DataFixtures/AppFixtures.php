@@ -63,6 +63,7 @@ class AppFixtures extends Fixture
             $room->setCapacity($faker->numberBetween(1, 100));
             $room->setDayPrice($faker->randomFloat(2, 50, 500));
             $room->setIsRentable($faker->boolean());
+            $room->setPicture('/images/salle_' . ($i + 1) . '.jpg');
             // On génère un nombre aléatoire entre 1 et 5
             // qui déterminera le nombre d'options à ajouter à la salle
             $max = rand(1, 5);
