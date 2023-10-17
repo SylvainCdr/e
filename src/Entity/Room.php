@@ -30,9 +30,6 @@ class Room
     #[ORM\Column]
     private ?bool $isRentable = null;
 
-    #[ORM\ManyToMany(targetEntity: Option::class, inversedBy: 'rooms')]
-    private Collection $options;
-
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Booking::class)]
     private Collection $bookings;
 
@@ -44,7 +41,6 @@ class Room
 
     public function __construct()
     {
-        $this->options = new ArrayCollection();
         $this->bookings = new ArrayCollection();
         $this->optionals = new ArrayCollection();
     }
@@ -114,29 +110,6 @@ class Room
         return $this;
     }
 
-    /**
-     * @return Collection<int, Option>
-     */
-    public function getOptions(): Collection
-    {
-        return $this->options;
-    }
-
-    public function addOption(Option $option): static
-    {
-        if (!$this->options->contains($option)) {
-            $this->options->add($option);
-        }
-
-        return $this;
-    }
-
-    public function removeOption(Option $option): static
-    {
-        $this->options->removeElement($option);
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Booking>
