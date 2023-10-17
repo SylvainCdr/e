@@ -39,10 +39,14 @@ class Room
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\ManyToMany(targetEntity: Optional::class, mappedBy: 'rooms')]
+    private Collection $optionals;
+
     public function __construct()
     {
         $this->options = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->optionals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +181,33 @@ class Room
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Optional>
+     */
+    public function getOptionals(): Collection
+    {
+        return $this->optionals;
+    }
+
+    public function addOptional(Optional $optional): static
+    {
+        if (!$this->optionals->contains($optional)) {
+            $this->optionals->add($optional);
+            $optional->addRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOptional(Optional $optional): static
+    {
+        if ($this->optionals->removeElement($optional)) {
+            $optional->removeRoom($this);
+        }
 
         return $this;
     }
