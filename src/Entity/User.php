@@ -49,6 +49,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        
+        // Modification du Constructeur afin que le nouvel User soit définit en ROLE_USER
+        $roles[] = 'ROLE_USER';
+        $this->roles = $roles;
     }
 
     public function getId(): ?int
