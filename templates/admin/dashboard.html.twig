@@ -29,7 +29,16 @@
       <td class="bg-{{ item.status.color}}" >{{ item.user.name }}</td>
       <td class="bg-{{ item.status.color}}" >{{ item.totalPrice }}</td>
       <td class="bg-{{ item.status.color}}" >{{ item.status.name }}</td>
-      <td >action</td>
+      <td class="bg-{{ item.status.color}}" >
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" autocomplete="on" checked> Accepter
+  </label>
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Refuser
+  </label>
+ 
+</div></td>
 
     </tr>
 {% endfor %}
