@@ -20,11 +20,15 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email')
             ->add('name')
+<<<<<<< HEAD
             
            
             
 
             
+=======
+             
+>>>>>>> f79fe51e67c6c0f1e62065eddbda35d7aef57604
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

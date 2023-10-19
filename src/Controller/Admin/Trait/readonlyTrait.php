@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\trait;
+namespace App\Controller\Admin\Trait;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;

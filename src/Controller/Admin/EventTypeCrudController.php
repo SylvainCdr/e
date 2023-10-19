@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+
 use App\Entity\EventType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
