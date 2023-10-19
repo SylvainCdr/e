@@ -29,8 +29,8 @@ class RoomCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            ImageField::new('picture'),
             IdField::new('id'),
+        //  ImageField::new('picture'),
             TextField::new('name'),
             TextField::new('address'),
             NumberField::new('capacity'),
