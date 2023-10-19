@@ -10,14 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PageController extends AbstractController
 {
-    #[Route('/', name: 'app_page')]
-    public function index(): Response
-    {
-        return $this->render('page/index.html.twig', [
-            'controller_name' => 'PageController',
-        ]);
-    }
-    
     #[Route('/userDashboard', name: 'app_userDashboard')]
     public function dashboard(BookingRepository $bookingRepository, RoomRepository $rRepo): Response
     {
