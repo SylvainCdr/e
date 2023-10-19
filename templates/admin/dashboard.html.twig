@@ -3,7 +3,7 @@
 
 {% block page_content %} 
 
-
+<h2 class="text-center">Réservation(s) nécessitant une action</h2>
 <table class="table table-sm table-dark">
   <thead>
     <tr>
@@ -15,7 +15,7 @@
       <th scope="col">CLient</th>
       <th scope="col">Prix total</th>
       <th scope="col">Statut</th>
-      <th scope="col"></th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +29,7 @@
       <td class="bg-{{ item.status.color}}" >{{ item.user.name }}</td>
       <td class="bg-{{ item.status.color}}" >{{ item.totalPrice }}</td>
       <td class="bg-{{ item.status.color}}" >{{ item.status.name }}</td>
+      <td >action</td>
 
     </tr>
 {% endfor %}
@@ -40,7 +41,7 @@
 
 
 
-
+<h2 class="text-center"> Suivi réservation(s)</h2>
 <table class="table table-sm table-dark">
   <thead>
     <tr>
