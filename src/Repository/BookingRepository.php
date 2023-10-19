@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Booking;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Booking>
@@ -19,6 +20,25 @@ class BookingRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Booking::class);
+    }
+
+       /**
+    * @return count of Bookings - Returns an integer
+    */
+    public function countBookingsByOwner(User $user): int
+    {
+ 
+             $bookings = $this->createQueryBuilder('b')
+             ->andWhere('b.user = :user')
+             ->setParameter('user', $user)
+             ->orderBy('b.startDate', 'DESC')
+             ->orderBy('b.status', 'ASC')
+             ->getQuery()
+             ->getResult()
+         ;
+         
+               
+        return count($bookings);
     }
 
 //    /**
