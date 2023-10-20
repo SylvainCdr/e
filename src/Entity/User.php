@@ -50,6 +50,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
     private Collection $bookings;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -118,6 +121,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+     /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getConfirm_password(): string
+    {
+        return $this->confirm_password;
+    }
+
+    public function setConfirm_password(string $confirm_password): static
+    {
+        $this->confirm_password = $confirm_password;
 
         return $this;
     }
@@ -208,4 +226,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+ 
+public function isVerified(): bool
+{
+    return $this->isVerified;
+}
+
+public function setIsVerified(bool $isVerified): static
+{
+    $this->isVerified = $isVerified;
+
+    return $this;
+}
 }
