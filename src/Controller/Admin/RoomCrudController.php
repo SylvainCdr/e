@@ -18,7 +18,7 @@ use Faker\Core\Number;
 
 class RoomCrudController extends AbstractCrudController
 {
-    use Trait\readonlyTrait;
+    
     public static function getEntityFqcn(): string
     {
        

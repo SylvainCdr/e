@@ -12,7 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 
 class UserCrudController extends AbstractCrudController
 {
-    use Trait\readonlyTrait;
+   
     public static function getEntityFqcn(): string
     {
         return User::class;
