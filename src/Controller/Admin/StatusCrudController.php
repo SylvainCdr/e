@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class StatusCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return Status::class;
@@ -27,6 +28,7 @@ class StatusCrudController extends AbstractCrudController
             ->add(Crud::PAGE_EDIT, Action::SAVE_AND_ADD_ANOTHER)
         ;
     }
+
  
     /*
     public function configureFields(string $pageName): iterable

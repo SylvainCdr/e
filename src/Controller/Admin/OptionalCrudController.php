@@ -26,9 +26,7 @@ class OptionalCrudController extends AbstractCrudController
             ->add(Crud::PAGE_EDIT, Action::SAVE_AND_ADD_ANOTHER)
         ;
     }
-    
 
-    
 
     public function configureFields(string $pageName): iterable
     {

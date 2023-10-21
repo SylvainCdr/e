@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Repository\RoomRepository;
 use App\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +24,19 @@ class PageController extends AbstractController
             'countBookings' => $countBookings,
         ]);
     }
+ 
+    
 
+ 
     #[Route('/about', name: 'app_about')]
     public function about()
     {
 
         return $this->render('page/about.html.twig');
     }
+ 
 }
+
+
+
+ 

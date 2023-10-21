@@ -3,6 +3,7 @@
 {% block title %}Hello PageController!{% endblock %}
 
 {% block body %}
+{{ include('_partials/header.html.twig') }}
 
 <body>     
             </div>
@@ -51,5 +52,5 @@
 </style>
 
 </body>
-
+{{ include('_partials/footer.html.twig') }}
 {% endblock %}

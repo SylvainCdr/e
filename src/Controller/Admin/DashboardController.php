@@ -14,17 +14,9 @@ use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\Admin\BookingCrudController;
 use Symfony\Component\Routing\Annotation\Route;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -46,9 +38,9 @@ class DashboardController extends AbstractDashboardController
     
     #[Route('/admin', name: 'admin')]
     public function index(): Response
+    {  
 
-    {
-    
+
         // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
@@ -105,20 +97,15 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard
     {
-         
         return Dashboard::new()
-        -> setTitle('<img src="/images/logo.png">');
-        
-
-        
-
+        -> setTitle('<img src="/images/logo.png">');   
     }
 
     
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home', Booking::class, Room::class, User::class);
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Réservation', 'fas fa-calendar', Booking::class);
         yield MenuItem::linkToCrud('Salle', 'fas fa-people-roof', Room::class);
         yield MenuItem::linkToCrud('Client', 'fas fa-user', User::class);
@@ -128,6 +115,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Statut', 'fas fa-hourglass', Status::class);
     }
 
-    
-}  
+   
+  
 
+  
+}

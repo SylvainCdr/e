@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -22,11 +23,12 @@ class RegistrationController extends AbstractController
 
         
         $user = new User();
+        
         // dd($request);
         // $user = $request->get();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        $email=$form->get('email')->getData();
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -40,6 +42,8 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_userDashboard');
+            
+            return $this->redirectToRoute('app_login');
             // do anything else you need here, like send an email
 
             // return $userAuthenticator->authenticateUser(
@@ -51,6 +55,9 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'email'=>$email,
         ]);
+
+        
     }
 }

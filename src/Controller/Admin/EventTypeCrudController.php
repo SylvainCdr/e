@@ -14,10 +14,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class EventTypeCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return EventType::class;
     }
+
     
     public function configureActions(Actions $actions): Actions
     {
@@ -27,10 +29,9 @@ class EventTypeCrudController extends AbstractCrudController
             ->add(Crud::PAGE_EDIT, Action::SAVE_AND_ADD_ANOTHER)
         ;
     }
-    
 
-    
 
+     
 
     public function configureFields(string $pageName): iterable
     {
