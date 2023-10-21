@@ -35,8 +35,6 @@ class RegistrationFormType extends AbstractType
                             ]),
                 new Regex('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/', "Il faut 8 caractères une lettre en majuscule, au moin un chiffre et un caractère special")],
                 ])
-
-                
         
                 ->add('address')
                 ->add('phone')

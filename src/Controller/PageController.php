@@ -12,12 +12,14 @@ class PageController extends AbstractController
     #[Route('/userDashboard', name: 'app_userDashboard')]
     public function dashboard(BookingRepository $bookingRepository, RoomRepository $rRepo): Response
     {
-
+        
         //$aRooms = $entityManager->getRepository(Booking::class)->findAvailByDate('2023-10-20', '2023-10-21');
         $aRooms = $rRepo->findAll();
         $countBookings = $bookingRepository->countBookingsByOwner($this->getUser());
+        
         return $this->render('page/about.html.twig', [
             'aRooms' => $aRooms,
+
             // 'countBookings' => $countBookings,
             'controller_name' => 'PageController',
             'user' => $this->getUser(),
@@ -31,7 +33,7 @@ class PageController extends AbstractController
     #[Route('/about', name: 'app_about')]
     public function about()
     {
-
+        
         return $this->render('page/about.html.twig');
     }
  
