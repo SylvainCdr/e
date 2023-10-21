@@ -9,6 +9,10 @@ use App\Entity\Booking;
 use App\Entity\Optional;
 use App\Entity\EventType;
 use App\Entity\TypeOption;
+use App\Repository\BookingRepository;
+use App\Repository\StatusRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\BookingCrudController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,14 +25,30 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
-{ 
+{
+
+    protected $bookingRepository;
+    protected $statusRepository;
+    protected $entityManager;
+
+    public function __construct(
+        BookingRepository $bookingRepository, StatusRepository $statusRepository, EntityManagerInterface $entityManager
+    ) {
+        $this->bookingRepository = $bookingRepository;
+        $this->statusRepository = $statusRepository;
+        $this->entityManager = $entityManager;
+    }
+    
     #[Route('/admin', name: 'admin')]
     public function index(): Response
+
     {
-       
+    
         // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
@@ -45,7 +65,42 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-        return $this->render('admin/dashboard.html.twig');
+
+
+       return $this->render('admin/dashboard.html.twig',[
+        'Prereserved'=> $this->bookingRepository->findPrereservedBookings(),
+        'NotPrereserved'=>$this->bookingRepository->findNotPrereservedBookings(),
+
+       ]);
+    
+    }
+
+    #[Route('/admin/booking/{id}/update-status', name: 'admin_update_booking_status', methods: ['POST'])]
+    public function updateBookingStatus(Request $request, EntityManagerInterface $entityManager, int $id)
+    {
+        $formData = $request->request->all();
+
+        
+
+        $booking = $this->bookingRepository->findOneBy(
+            ['id'=>$id]);
+            if ($formData ['btn'] == 'accepted') {
+                $status = $this->statusRepository->findOneBy(
+                    ['name'=>'Réservée']);
+                $booking->setStatus($status) ;
+            } 
+            else {
+                $status = $this->statusRepository->findOneBy(
+                    ['name'=>'Annulée']);
+                $booking->setStatus($status) ;
+
+            }
+
+
+    $entityManager->persist($booking);
+    $entityManager->flush();
+
+        return $this->redirectToRoute('admin');
     }
 
     public function configureDashboard(): Dashboard
@@ -58,6 +113,8 @@ class DashboardController extends AbstractDashboardController
         
 
     }
+
+    
 
     public function configureMenuItems(): iterable
     {
@@ -72,13 +129,5 @@ class DashboardController extends AbstractDashboardController
     }
 
     
-
-    
-     
-
-    
-   
-    
-}
-
+}  
 
