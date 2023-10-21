@@ -67,7 +67,7 @@ class BookingRepository extends ServiceEntityRepository
  /**
     * @return count of Bookings - Returns an integer
     */
-    public function countBookingsByOwner(User $user): int
+    public function countBookingsByOwner($user): int
     {
  
              $bookings = $this->createQueryBuilder('b')
