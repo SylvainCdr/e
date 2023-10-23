@@ -33,15 +33,63 @@ class BookingController extends AbstractController
         $this->statusRepository = $statusRepository;
     }
 
-    #[Route('/{id}', name: 'details')]
-    public function details(Booking $booking): Response
+    #[Route('/edition/{id}', name: 'details')]
+    public function details(Booking $booking, Request $request, EntityManagerInterface $em): Response
     {
-        $optionals = $this->optionalRepository->findAll();
+        if($booking->getStatus() == "Pré-réservée"){
+        //Find a room by id
+        $room =$this->roomRepository->findOneBy(['id' => $booking->getRoom()->getId()]);
+        
+        //$booking = $this->bookingRepository->findOneBy(['id' => $id]);
 
-        return $this->render('booking/details.html.twig', [
-            'booking' => $booking,
-            'listOptionals' => $optionals,
-        ]);
+        //We create the form for the booking
+        $bookingForm = $this->createForm(BookingFormType::class, $booking);
+
+        $roomOptions = $this->optionalRepository->findOptionsByRoom($room);
+
+        //We handle the request
+        $bookingForm->handleRequest($request);
+
+        //If the form is submitted and valid
+        if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
+
+            //We set the status of the booking
+            //to 'Pré-réservée'
+            //$booking->setStatus($this->statusRepository->findOneBy(['name' => 'Pré-réservée']));
+
+            //We set the total price of the booking
+            //by calculating the number of days between
+            //the start date and the end date
+            //TODO LATER: remove week-end days from the calculation
+            $nbDays = $booking->getEndDate()->diff($booking->getStartDate())->days;
+            $booking->setTotalPrice($room->getDayPrice() * ($nbDays + 1));
+
+            //We persist the booking
+            $em->persist($booking);
+
+            //We flush the booking
+            $em->flush();
+
+            //We add a flash message
+            $this->addFlash('success', 'Votre pré-réservation a bien été modifiée
+             et est soumise à validation par un administrateur. Vérifiez régulièrement 
+             l\'état de votre réservation dans votre espace personnel.');
+            
+             //We redirect to the user's Dashboard page
+            //return $this->redirectToRoute('app_booking_details', ['id' => $booking->getId()]);
+            return $this->redirectToRoute('app_userDashboard');
+        }
+
+                //We render the booking/add.html.twig view
+                return $this->render('booking/edit.html.twig', [
+                    'bookingForm' => $bookingForm->createView(),
+                    'room' => $room,
+                    'roomOptions' => $roomOptions,
+                ]);
+        }else{
+            return $this->redirectToRoute('app_userDashboard');
+        }
+
     }
 
     //Route to add a prebooking on a room

@@ -156,6 +156,4 @@ class BookingRepository extends ServiceEntityRepository
          ;
           return count($bookings);
     }
-
-
 }
