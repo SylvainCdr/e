@@ -47,6 +47,7 @@ class BookingCrudController extends AbstractCrudController
             TextField::new('comment'),
             // BooleanField::new('St'),
             // ArrayField::new('optionals')
+
         ];
     }
     

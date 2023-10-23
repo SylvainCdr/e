@@ -51,6 +51,13 @@ class Room
         return $this->id;
     }
 
+    public function setId(int $id): static
+    {
+        $this->id= $id;
+
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -144,7 +151,7 @@ class Room
 
     public function __toString(): string
     {
-        return $this->name ?? '';
+        return $this->getId() ?? '';
     }
 
     public function getPicture(): ?string

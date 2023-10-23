@@ -31,19 +31,22 @@ class BookingRepository extends ServiceEntityRepository
     public function findNotPrereservedBookings(): array
     {
  
-             $prereservedBookings = $this->createQueryBuilder('b')
+
+             $notPrereservedBookings = $this->createQueryBuilder('b')
+
            ->andWhere('b.status <>:prereserved')
            ->andWhere('b.status <>:available')
              ->setParameter('prereserved', 2)
              ->setParameter('available', 1)
              ->orderBy('b.status', 'ASC')
              ->orderBy('b.startDate', 'desc')
+
              ->getQuery()
              ->getResult()
          ;
-         
-               
-        return $prereservedBookings;
+ 
+        return $notPrereservedBookings;
+
     }
 
        /**
@@ -53,15 +56,42 @@ class BookingRepository extends ServiceEntityRepository
     {
  
              $prereservedBookings = $this->createQueryBuilder('b')
+
             ->andWhere('b.status =:prereserved')
             ->setParameter('prereserved', 2)
             ->orderBy('b.startDate', 'ASC')
             ->getQuery()
             ->getResult()
          ;
-         
                
-        return $prereservedBookings;
+
+    return $prereservedBookings;
+    
+}
+
+//Add an option to show an alert 5 days before the start date
+
+public function findPrereservedBookingsAlert(): array
+    { 
+        $urgent=[];
+        $bookings=$this->findPrereservedBookings();
+
+
+        foreach ($bookings as $booking) {
+            $startDate = $booking->getStartDate();
+            $today = new \DateTime();
+    
+            if ($startDate->diff($today)->days <= 4) {
+            $urgent[]=true;
+                
+            }
+            else { 
+                $urgent[]=false;
+            }
+        }
+
+return $urgent;
+
     }
 
  /**
@@ -86,10 +116,13 @@ class BookingRepository extends ServiceEntityRepository
     /**
     * @return array of bookings
     */
+
+  
     // find all bookings for a room with status = 'Réservée' or 'Pré-réservée'
     // and endDate >= today
     // order by status DESC
     // and order by startDate ASC
+
     public function bookingsByDateByRoom(int $roomId, \DateTime $endDate): array
     {
 
@@ -134,6 +167,7 @@ class BookingRepository extends ServiceEntityRepository
           return $bookings;
     }
 
+
     /**
     * @return nb of bookings with statusId parameter
     * returns an integer
@@ -156,4 +190,5 @@ class BookingRepository extends ServiceEntityRepository
          ;
           return count($bookings);
     }
+
 }

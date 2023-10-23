@@ -56,6 +56,7 @@ class RoomRepository extends ServiceEntityRepository
 
    }
 
+
    public function searching($mots)
    {
        $query= $this->createQueryBuilder('r');
@@ -69,5 +70,6 @@ class RoomRepository extends ServiceEntityRepository
        return $query->getQuery()->getResult();
 
    }
+
 
 }

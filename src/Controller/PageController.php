@@ -16,19 +16,14 @@ class PageController extends AbstractController
     public function dashboard(BookingRepository $bookingRepository, RoomRepository $rRepo, Request $request): Response
     {
 
-        
+   
         $form = $this->createForm(SearchFormType::class);
         $form->handleRequest($request);
        
         
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-           
-
-             
-
-           
-            
+      
            
             // do anything else you need here, like send an email
 
@@ -39,9 +34,6 @@ class PageController extends AbstractController
             // );
         }
 
-
-
- 
         $aRooms = $rRepo->findAll();
         $countBookings = $bookingRepository->countBookingsByOwner($this->getUser());
         $bookings = $bookingRepository->bookingsByOwner($this->getUser());
@@ -57,6 +49,7 @@ class PageController extends AbstractController
             'prereserved' => $prereserved,
             'cancelled' => $cancelled,
             'searchForm'=>$form->createView()
+
         ]);
 
 
