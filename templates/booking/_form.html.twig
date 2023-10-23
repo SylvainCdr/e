@@ -20,15 +20,18 @@
             {% if roomOptions %}
                 <div class="mb-2 text-start">
                     <span class="form-label">Options de la salle</span>
+                    <div class="border border-primary rounded p-1">
+                    {% set typeOpt = '' %}
+                    {% for opt in roomOptions %}
+                        {% if opt.type.name != typeOpt %}
+        
+                            {{ opt.type.name }} :
+                            {% set typeOpt = opt.type.name %}
+                        {% endif %}
+                        <li><span>{{opt.name}}</span> : {{ opt.description }}</li>
+                    {% endfor %}
+                    </div>
                 </div>
-                {% set typeOpt = '' %}
-                {% for opt in roomOptions %}
-                    {% if opt.type.name != typeOpt %}
-                        {{ opt.type.name }} :
-                        {% set typeOpt = opt.type.name %}
-                    {% endif %}
-                        <li test-start ><span>{{opt.name}}</span> : {{ opt.description }}</li>
-                {% endfor %}
             {% endif %}
         </div>
         <div class="col-4">
