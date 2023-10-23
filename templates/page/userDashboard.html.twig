@@ -47,7 +47,12 @@
                                 <h6 class="my-0">Salle n° {{ b.room.id }}: {{ b.room.name }}</h6>
                                 <small class="text-body-secondary">du {{b.startDate|date('d-m-Y')}} au {{b.endDate|date('d-m-Y')}}</small>
                                 </div>
-                                <span class="text-body-secondary">{{ b.totalPrice }}€</span>
+                                <div>
+                                <h6 class="my-0"><span class="text-body-secondary">{{ b.totalPrice }}€</span></h6>
+                                {% if b.status.name == "Pré-réservée"%}
+                                    <small class="text-body-secondary"><a href={{ path('app_booking_details', { "id": b.id }) }}>Modifier</a></small>
+                                {% endif %}
+                                </div>
                             </li>
                             {% endfor %}
                         {% endif %}
