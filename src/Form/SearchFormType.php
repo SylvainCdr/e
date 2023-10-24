@@ -15,12 +15,33 @@ class SearchFormType extends AbstractType
         $builder
             ->add('motCles', SearchType::class,
             [
-                'label'=> false,
+                'label'=> 'Localisation',
                 'attr'=>[
-                    'class'=>'form-control',
-                    'placeholder'=>'Entrez un Mot Clé'
-                ]
+                    
+                  
+                    'placeholder'=>'Entrez un mot clé',
+                    'class'=> 'border-2 border-warning'
+                    
+                ],
+                'required'=>false,
 
+
+            ])
+
+            ->add('capacity', IntegerType::class, [
+                
+                'label'=> 'Capacité',
+                'attr'=>[
+                    
+                  
+                    'placeholder'=>'Entrez une capacité mini',
+                    'class'=> 'border-2 border-warning'
+                    
+                ],
+                 
+                   
+                
+                'required'=>false,
             ])
         ;
     }
