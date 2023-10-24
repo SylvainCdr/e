@@ -31,6 +31,7 @@ class SearchFormType extends AbstractType
                 ],
                 'required'=>false,
 
+
             ])
 
             ->add('capacity', IntegerType::class, [
