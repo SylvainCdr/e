@@ -18,9 +18,9 @@
                 <input name="email" type="text" class="form-control" value={{app.user.email}} aria-label="Username" aria-describedby="basic-addon1" disabled>
             </div>
             {% if room.optionals %}
-                <div class="mb-2 text-start">
+                <div class="mb-2 text-start border border-primary rounded p-1">
                     <span class="form-label">Options de la salle</span>
-                    <div class="border border-primary rounded p-1">
+                    <div>
                     {% set typeOpt = '' %}
                     {% for opt in room.optionals %}
                         {% if opt.type.name != typeOpt %}

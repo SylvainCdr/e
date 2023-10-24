@@ -23,6 +23,35 @@ class OptionalRepository extends ServiceEntityRepository
         parent::__construct($registry, Optional::class);
     }
 
+    // select * from optional AS o
+    // join TypeOption AS t ON t.id=o.type
+    // join Room AS t ON r.id=o.rooms
+    // WHERE t.name='Software'
+    // AND r.capacity>50
+    // AND o.name='% pack %'
+    /**
+    * @return Optionals[] Returns an array of Optional objects
+    */
+    public function findRoomByCapacityByOptional(int $capacity, string $motCle, string $groupe): array
+    {
+        $opt = $this->createQueryBuilder('o')
+        ->distinct()
+        ->where('o.name= :motCle')
+        ->setParameter('motCle', $motCle)
+        ->innerJoin('o.rooms', 'r')
+        ->andWhere('r.capacity> :capacity')
+        ->setParameter('capacity', $capacity)
+        ->innerJoin('o.type', 't')
+        ->andWhere('t.name= :groupe')
+        ->setParameter('groupe', $groupe)
+        ->getQuery()
+        ->getResult()
+    ;
+
+    return $opt;
+    }
+
+
                   /**
     * @return Optionals[] Returns an array of Options objects
     */
