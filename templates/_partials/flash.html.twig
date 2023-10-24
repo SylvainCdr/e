@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-12">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+                <div class="alert-message">
+                {{ "now"|date("d/m/Y H:i:s", "Europe/Paris") }} : {{ message|trans({}, 'flashes') }}           
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+</div>

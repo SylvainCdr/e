@@ -22,16 +22,7 @@ class PageController extends AbstractController
        
         
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-      
-           
-            // do anything else you need here, like send an email
 
-            // return $userAuthenticator->authenticateUser(
-            //     $user,
-            //     $authenticator,
-            //     $request
-            // );
         }
 
         $aRooms = $rRepo->findAll();

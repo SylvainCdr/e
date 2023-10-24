@@ -151,7 +151,8 @@ class BookingController extends AbstractController
             $em->flush();
 
             //We add a flash message
-            $this->addFlash('success', 'Votre pré-réservation a bien été prise en compte
+            $this->addFlash('success',
+             'Votre pré-réservation a bien été prise en compte
              et est soumise à validation par un administrateur. Vérifiez régulièrement 
              l\'état de votre réservation dans votre espace personnel.');
             
