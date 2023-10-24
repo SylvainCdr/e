@@ -6,35 +6,9 @@
 
      {{ include('_partials/header.html.twig') }}
      {{ include('_partials/navbar.html.twig') }}
-     
-<div class="row">
-            {# <div class="col-9"> #}
-            <div class="form-holder ">
-              
-                <div class="form-content ">
-                    <div class="form-items ">
-                         
-                           {{ form_start(searchForm) }}
+     {{ include('_partials/searchbar.html.twig') }}
 
-                            <div class="col-3 ">
-                            
-                                     {{ form_row(searchForm.motCles) }}
-                                      
-                                 
-                            </div>
 
-                             <div class="col-3">
-                                     {{ form_row(searchForm.capacity) }}
-                                 
-                            </div>
-                    
-                    </div>   
-                </div>
-                    <button class="btn btn-primary">Recherche</button>
-            </div>
-        {# </div> #}
-    </div>
-  {{ form_end(searchForm) }}
 
 
         <!-- Page Content-->
