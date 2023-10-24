@@ -2,7 +2,7 @@
     <div class="col-md-12">
     {% for type, messages in app.flashes %}
         {% for message in messages %}
-            <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+            <div id="my-alert" class="alert alert-{{ type }} alert-dismissible" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
                 <div class="alert-message">
@@ -13,3 +13,12 @@
     {% endfor %}
     </div>
 </div>
+<script>
+    // Récupérer la div à masquer
+    var myDiv = document.getElementById('my-alert');
+
+    // Masquer la div après 5 secondes
+    setTimeout(function() {
+        myDiv.style.display = 'none';
+    }, 5000);
+</script>
