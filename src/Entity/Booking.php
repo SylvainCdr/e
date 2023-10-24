@@ -28,9 +28,6 @@ class Booking
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $startDate = null;
 
-    
-    #[Assert\Date()]
-    #[Assert\GreaterThanOrEqual($this->getStartDate())]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
