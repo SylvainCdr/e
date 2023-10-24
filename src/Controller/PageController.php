@@ -72,6 +72,13 @@ public function about()
     return $this->render('page/about.html.twig');
 }
 
+#[Route('/CGU', name: 'app_CGU')]
+public function CGU()
+{
+    
+    return $this->render('page/CGU.html.twig');
+}
+
 }
 
  
