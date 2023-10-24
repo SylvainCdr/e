@@ -19,7 +19,7 @@ class PageController extends AbstractController
     public function dashboard(BookingRepository $bookingRepository, RoomRepository $rRepo,Request $request): Response
     {  
 
-
+       
 
 
         $form = $this->createForm(SearchFormType::class);
@@ -27,7 +27,7 @@ class PageController extends AbstractController
         
         
        
-        
+        $aRooms = $rRepo->findAll();
         $motsRecherche = $form->get('motCles')->getData();
         if ($form->isSubmitted() && $form->isValid()) {
             $motsCapacity=$form->get('capacity')->getData();
@@ -63,14 +63,14 @@ class PageController extends AbstractController
             
            
             
-    
+      
             
         
         }
        
 
 
-
+          
 
 
         // $aRooms = $rRepo->findAll();

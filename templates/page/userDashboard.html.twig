@@ -10,7 +10,7 @@
          
 
  <div class="row">
-            <div class="col-4">
+            {# <div class="col-9"> #}
             <div class="form-holder ">
               
                 <div class="form-content ">
@@ -18,13 +18,14 @@
                          
                            {{ form_start(searchForm) }}
 
-                            <div class="col-md-12 ">
+                            <div class="col-3 ">
                             
                                      {{ form_row(searchForm.motCles) }}
+                                      
                                  
                             </div>
 
-                             <div class="col-md-12">
+                             <div class="col-3">
                                      {{ form_row(searchForm.capacity) }}
                                  
                             </div>
@@ -33,11 +34,8 @@
                 </div>
                     <button class="btn btn-primary">Recherche</button>
             </div>
-        </div>
+        {# </div> #}
     </div>
-    </div>
-    </div>
-</div>
   {{ form_end(searchForm) }}
 
 

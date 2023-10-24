@@ -26,7 +26,7 @@ class SearchFormType extends AbstractType
                     
                   
                     'placeholder'=>'Entrez un Mots clès',
-                    'class'=> 'border border-primary'
+                    'class'=> 'border-2 border-warning'
                     
                 ],
                 'required'=>false,
@@ -40,7 +40,7 @@ class SearchFormType extends AbstractType
                     
                   
                     'placeholder'=>'Entrez un Mots clès',
-                    'class'=> 'border border-primary'
+                    'class'=> 'border-2 border-warning'
                     
                 ],
                  
