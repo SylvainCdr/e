@@ -1,0 +1,28 @@
+
+
+{% block page_content %} 
+
+
+<h2 class="text-center">Listing salle</h2>
+
+<table class="table table-sm table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Salle</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for item in allRooms %}
+    <tr>
+      <th scope="row">{{ item.id }}</th>
+      <td class="bg-{{ item.status.color}}" > <img src="{{ item.room.picture }}" width="140" height="70"></td>
+      <td class="bg-{{ item.status.color}}" >{{ item.room.name }}</td>
+      <td class="bg-{{ item.status.color}}" >{{ item.optionals.name }}</td>
+        
+    </tr>
+    </tbody>
+{% endfor %}
+{% endblock %}
